@@ -10,5 +10,6 @@
 
 @interface CommentListViewControllerForPad : GAITrackedViewController
 - (id)initWithArticle:(ArticleModel *)item articleId:(NSString *)articleId;
+@property (nonatomic, assign) BOOL isPresent;
 
 @end

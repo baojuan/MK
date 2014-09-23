@@ -926,6 +926,7 @@
 		BFFAF65919D1A52B00934FF2 /* libGzipCompressor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBE196507B200B44F4F /* libGzipCompressor.a */; };
 		BFFAF65A19D1A52B00934FF2 /* libReachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBF196507B200B44F4F /* libReachability.a */; };
 		BFFAF65B19D1A52B00934FF2 /* libSBJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DC0196507B200B44F4F /* libSBJSON.a */; };
+		BFFAF65F19D1C8C700934FF2 /* OldPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFFAF65E19D1C8C700934FF2 /* OldPlayViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1699,6 +1700,8 @@
 		BFCB4DDF19650C5100B44F4F /* NGVolumeControl.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NGVolumeControl.bundle; sourceTree = "<group>"; };
 		BFFAF65319D1A4AD00934FF2 /* MKProject copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MKProject copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFFAF65419D1A4AD00934FF2 /* MKProject copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MKProject copy-Info.plist"; path = "/Users/baojuan/Desktop/ios 9.23/MKProject copy-Info.plist"; sourceTree = "<absolute>"; };
+		BFFAF65D19D1C8C700934FF2 /* OldPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldPlayViewController.h; sourceTree = "<group>"; };
+		BFFAF65E19D1C8C700934FF2 /* OldPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldPlayViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2402,6 +2405,8 @@
 				BFC81CA3198D722700AA2B3E /* NewsDetailViewController.m */,
 				BFC81CA9198E7D2F00AA2B3E /* ScanPictureForNewsDetailViewController.h */,
 				BFC81CAA198E7D2F00AA2B3E /* ScanPictureForNewsDetailViewController.m */,
+				BFFAF65D19D1C8C700934FF2 /* OldPlayViewController.h */,
+				BFFAF65E19D1C8C700934FF2 /* OldPlayViewController.m */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -3707,6 +3712,7 @@
 				BF649834194F4D200080A8F6 /* MMDrawerController.m in Sources */,
 				BFC4A92C1972AC2B002EB455 /* FSImageView.m in Sources */,
 				BFC4A92D1972AC2B002EB455 /* FSImageViewerViewController.m in Sources */,
+				BFFAF65F19D1C8C700934FF2 /* OldPlayViewController.m in Sources */,
 				BFBA241B197FFEEB00FF7A45 /* Base64.m in Sources */,
 				BF8DD4D619652B1A00872818 /* MJRefreshHeaderView.m in Sources */,
 				BF5A022F195A01550037893C /* SegmentView.m in Sources */,

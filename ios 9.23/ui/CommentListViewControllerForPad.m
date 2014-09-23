@@ -36,6 +36,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.isPresent = NO;
         appdelegate = APPDELEGATE;
         _dataArray = [[NSMutableArray alloc] init];
         page = 1;

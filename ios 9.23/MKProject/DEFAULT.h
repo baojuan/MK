@@ -1,7 +1,9 @@
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 #define SCREEN_EXTRA_HEIGHT (UIScreen mainScreen].bounds.size.height - 480.0f)
-#define EXTRA_IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue]>=7?20.0f:0.0f)
+#define EXTRA_IOS7 (([[[UIDevice currentDevice] systemVersion] floatValue]>=7 && [[[UIDevice currentDevice] systemVersion] floatValue]<8)?20.0f:0.0f)
+
+#define IS_IOS8 ([[[UIDevice currentDevice] systemVersion] floatValue]>=8?YES:NO)
 
 
 #define RECT(x,y,width,height) (CGRectMake(x, y, width, height))

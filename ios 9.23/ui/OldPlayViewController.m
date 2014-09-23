@@ -1,15 +1,12 @@
 //
-//  PlayViewController.m
+//  OldPlayViewController.m
 //  MKProject
 //
-//  Created by baojuan on 14-6-28.
+//  Created by baojuan on 14-9-23.
 //  Copyright (c) 2014年 baojuan. All rights reserved.
 //
 
-
-
-
-#import "PlayViewController.h"
+#import "OldPlayViewController.h"
 #import "PlayManager.h"
 #import "NGVolumeControl.h"
 #import "MJRefresh.h"
@@ -23,9 +20,7 @@
 #import "CachingView.h"
 
 #define SCALE SCREEN_WIDTH / 320.0
-
-
-@interface PlayViewController () <UITableViewDataSource, UITableViewDelegate, MJRefreshBaseViewDelegate,MobiSageFloatWindowDelegate,MobiSageBannerDelegate>
+@interface OldPlayViewController ()<UITableViewDataSource, UITableViewDelegate, MJRefreshBaseViewDelegate,MobiSageFloatWindowDelegate,MobiSageBannerDelegate>
 @property (nonatomic, weak) CyberPlayerController *cbPlayerController;
 @property (nonatomic, strong) NSMutableArray *dataArray; //listarray
 @property (nonatomic, strong) UITableView *tableView;
@@ -44,13 +39,11 @@
 
 @end
 
-
-
-@implementation PlayViewController
+@implementation OldPlayViewController
 {
     
     AppDelegate *appdelegate;
-
+    
     NSTimer *_timer;
     BOOL timerPause;
     
@@ -83,7 +76,7 @@
     CachingView *cacheView;
     
     MJRefreshFooterView *_footer;
-
+    
     
     ShareView *shareView;
     
@@ -102,7 +95,7 @@
         // Custom initialization
         appdelegate = APPDELEGATE;
         self.screenName = @"播放视频";
-
+        
     }
     return self;
 }
@@ -138,15 +131,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
     cacheView = [[CachingView alloc] init];
     
     //[self ad];
-
+    
     
     [self setPlayViewControllerProperty];
     [self bannerId];
-
+    
     [self setHeadView];
     [self setBottomView];
     [self setPlayView];
@@ -155,7 +148,7 @@
     [self changyan];
     
     
-
+    
     
     shareView = [[ShareView alloc] init];
     shareView.delegate = self;
@@ -165,13 +158,13 @@
     self.item.link = [NSString stringWithFormat:@"%@/m/detail/videosdetails.aspx?id=%@",appdelegate.appUrl,self.item.articleId];
     [shareView getArticleModel:self.item];
     [self.view addSubview:shareView];
-
+    
     [self.view addSubview:cacheView];
-
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playnow) name:@"playNow" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playnow) name:@"playPause" object:nil];
-
+    
 }
 
 - (void)playnow
@@ -182,7 +175,7 @@
 - (void)beginPlay
 {
     [self performSelectorOnMainThread:@selector(playButtonClick:) withObject:_playButton waitUntilDone:NO];
-
+    
 }
 
 - (void)ad
@@ -190,9 +183,9 @@
     if (self.floatWindow) {
         
     }else{
-    self.floatWindow = [[MobiSageFloatWindow alloc] initWithAdSize:Float_size_0
-                                                          delegate:self
-                                                         slotToken:MS_Test_SlotToken_Poster];
+        self.floatWindow = [[MobiSageFloatWindow alloc] initWithAdSize:Float_size_0
+                                                              delegate:self
+                                                             slotToken:MS_Test_SlotToken_Poster];
     }
 }
 
@@ -203,7 +196,7 @@
 - (void)mobiSageFloatClick:(MobiSageFloatWindow*)adFloat
 {
     NSLog(@"mobiSageFloatClick");
-
+    
 }
 
 - (void)mobiSageFloatClose:(MobiSageFloatWindow*)adFloat
@@ -212,15 +205,15 @@
     [self.floatWindow removeFromSuperview];
     self.floatWindow.delegate = nil;
     self.floatWindow = nil;
-
+    
 }
 
 - (void)mobiSageFloatSuccessToRequest:(MobiSageFloatWindow*)adFloat
 {
     NSLog(@"mobiSageFloatSuccessToRequest");
     [self.floatWindow showAdvView];
-//    [self performSelector:@selector(mobiSageFloatClose:) withObject:self.floatWindow afterDelay:2];
-
+    //    [self performSelector:@selector(mobiSageFloatClose:) withObject:self.floatWindow afterDelay:2];
+    
 }
 
 - (void)mobiSageFloatFaildToRequest:(MobiSageFloatWindow*)adFloat withError:(NSError *)error
@@ -249,17 +242,17 @@
                                              value:nil] build];
     [[GAI sharedInstance].defaultTracker send:event];
     [[GAI sharedInstance] dispatch];
-
+    
     [MobClick event:[NSString stringWithFormat:@"正在播放视频 %@" ,self.url]];
-
-
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [UIApplication sharedApplication].statusBarHidden = NO;
     [UIApplication sharedApplication].idleTimerDisabled = NO;
-
+    
 }
 
 - (void)setPlayViewControllerProperty
@@ -294,13 +287,13 @@
     [self performSelectorOnMainThread:@selector(cacheHidden) withObject:Nil waitUntilDone:NO];
     NSLog(@"prepare done");
     [self startTimer];
-//    if (isFirst)
-//    {
-//        return;
-//        isFirst = NO;
-//    }
+    //    if (isFirst)
+    //    {
+    //        return;
+    //        isFirst = NO;
+    //    }
     [self performSelectorOnMainThread:@selector(playButtonClick:) withObject:_playButton waitUntilDone:NO];
-
+    
 }
 
 
@@ -369,7 +362,7 @@
     
     //开始启动UI刷新
     [self startTimer];
-
+    
 }
 
 
@@ -391,7 +384,7 @@
     
     
     
-
+    
     
     if (!self.isLocal) {
         
@@ -515,7 +508,6 @@
         return;
     }
     CommentListViewController *comment = [[CommentListViewController alloc] initWithArticle:self.item articleId:self.changyanId];
-    comment.isPresent = YES;
     [self presentViewController:comment animated:YES completion:^{
         ;
     }];
@@ -532,7 +524,7 @@
         rect.origin.y += rect.size.height;
         shareView.frame = rect;
         [UIView commitAnimations];
-
+        
     }
     else {
         [UIView beginAnimations:nil context:nil];
@@ -540,7 +532,7 @@
         rect.origin.y -= rect.size.height;
         shareView.frame = rect;
         [UIView commitAnimations];
-
+        
     }
     
     button.selected = !button.selected;
@@ -582,11 +574,11 @@
         [dict setObject:array forKey:LOCAL_LANGUAGE(@"video")];
         [[NSUserDefaults standardUserDefaults] setObject:dict forKey:COLLECT_USERDEFAULT];
         [[NSUserDefaults standardUserDefaults] synchronize];
-
-
+        
+        
     }
     button.selected = !button.selected;
-
+    
 }
 
 #pragma mark - tableView
@@ -629,7 +621,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = FONTSIZE(14);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+        
     }
     if (self.nowNumber == indexPath.row) {
         cell.textLabel.textColor = RGBCOLOR(255, 138, 0);
@@ -651,7 +643,7 @@
     totalTime.text = @"00:00";
     currentTime.text = @"00:00";
     slider.value = 0;
-
+    
     
     ArticleModel *articleModel = [_dataArray objectAtIndex:indexPath.row];
     self.item = articleModel;
@@ -662,7 +654,7 @@
 
 - (void)videoUrlArrayRequest
 {
-
+    
     UrlRequest *request = [[UrlRequest alloc] init];
     NSString *url = [NSString stringWithFormat:@"%@/flashinterface/getmovieurl.ashx?movieid=%@&typeid=2&level=10",HOST,self.item.articleId];
     [request urlRequestWithGetUrl:url delegate:self finishMethod:@"finishVideoMethod:" failMethod:@"failVideoMethod:"];
@@ -727,7 +719,7 @@
         [array addObject:model];
     }
     [_footer endRefreshing];
-
+    
     if ([array count] == 0)
     {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -737,7 +729,7 @@
         [hud hide:YES afterDelay:1];
         return;
     }
-
+    
     [self.dataArray addObjectsFromArray:array];
     [self.tableView reloadData];
     self.page ++;
@@ -832,7 +824,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [_cbPlayerController stop];
     [self stopTimer];
-//    adBanner.delegate = Nil;
+    //    adBanner.delegate = Nil;
     [self dismissViewControllerAnimated:YES completion:^{
         [shareView removeFromSuperview];
         shareView = nil;
@@ -847,7 +839,7 @@
 {
     playBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"playBackgroundPlay"]];
     CGFloat sepWidth;
-
+    
     if (!self.isLocal) {
         playBackgroundView.frame = CGRectMake((_cbPlayerController.view.frame.size.width - 310 / 4.0 * 5) / 2.0, 230 * SCALE, 310 / 4.0 * 5, 44 * scale);
         sepWidth = playBackgroundView.frame.size.width / 6.0;
@@ -855,7 +847,7 @@
     else {
         playBackgroundView.frame = CGRectMake((_cbPlayerController.view.frame.size.width - 310) / 2.0, 230 * SCALE, 310, 44 * scale);
         sepWidth = playBackgroundView.frame.size.width / 4.0;
-
+        
     }
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         CGRect rect = playBackgroundView.frame;
@@ -926,7 +918,7 @@
     UIImageView *sep5 = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
     sep5.frame = CGRectMake(sepWidth * 5 + 4, (playBackgroundView.frame.size.height - 30 * scale) / 2.0, 1, 30 * scale);
     [playBackgroundView addSubview:sep5];
-
+    
     videoDefinitionButton = [[VideoDefinitionChooseButton alloc] initWithFrame:CGRectMake(playBackgroundView.frame.origin.x + sepWidth * 4, playBackgroundView.frame.origin.y - 148, sepWidth, playBackgroundView.frame.size.height + 148) Delegate:self buttonFrame:CGRectMake(0, 0, sepWidth, playBackgroundView.frame.size.height)];
     [self.view addSubview:videoDefinitionButton];
     
@@ -1040,7 +1032,7 @@
     volumeController.hidden = !volumeController.hidden;
     videoDefinitionButton.hidden = !videoDefinitionButton.hidden;
     [videoDefinitionButton backgroundViewHiddenOrNot:YES];
-//    adBanner.hidden = !adBanner.hidden;
+    //    adBanner.hidden = !adBanner.hidden;
 }
 
 
@@ -1059,7 +1051,7 @@
 }
 
 
-#pragma mark - banner id 
+#pragma mark - banner id
 - (void)bannerId
 {
     //创建MobiSage横幅广告
@@ -1086,7 +1078,7 @@
 - (void)mobiSageBannerClick:(MobiSageBanner*)adBanner
 {
     NSLog(@"mobiSageBannerClick");
-
+    
 }
 
 //横幅广告成功展示时,触发此回调方法,用于统计广告展示数
@@ -1131,9 +1123,9 @@
              hud.removeFromSuperViewOnHide = YES;
              [hud hide:YES afterDelay:1];
              return ;
-
+             
          }
-
+         
          MKLog(@"%@",responseStr);
          NSData *data = [responseStr dataUsingEncoding:NSUTF8StringEncoding];
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -1153,12 +1145,12 @@
              hud.removeFromSuperViewOnHide = YES;
              [hud hide:YES afterDelay:1];
              return ;
-
+             
          }
-
+         
          NSData *data = [responseStr dataUsingEncoding:NSUTF8StringEncoding];
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//         toolBar.talkLabel.text = [[[[dict objectForKey:@"result"] objectForKey:self.articleId] objectForKey:@"comments"] stringValue];
+         //         toolBar.talkLabel.text = [[[[dict objectForKey:@"result"] objectForKey:self.articleId] objectForKey:@"comments"] stringValue];
      }];
 }
 
@@ -1189,7 +1181,6 @@
         return UIInterfaceOrientationLandscapeLeft;
     }
 }
-
 
 
 @end

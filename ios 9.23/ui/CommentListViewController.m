@@ -35,6 +35,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.isPresent = NO;
         appdelegate = APPDELEGATE;
         _dataArray = [[NSMutableArray alloc] init];
         page = 1;
@@ -79,6 +80,9 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:IMAGENAMED(@"commentBottom")];
     imageView.userInteractionEnabled = YES;
     imageView.frame = RECT(0, SCREEN_HEIGHT - 95 / 2.0, SCREEN_WIDTH, 95 / 2.0);
+    if (IS_IOS8 && self.isPresent) {
+        imageView.frame = RECT(0, SCREEN_WIDTH - 95 / 2.0, SCREEN_HEIGHT, 95 / 2.0);
+    }
     UILabel *label = [[UILabel alloc] initWithFrame:RECT(15, 13, imageView.frame.size.width - 26, 95 / 2.0 - 26)];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -163,6 +167,9 @@
 - (void)setTableViewProperty
 {
     self.tableView = [[UITableView alloc] initWithFrame:RECT(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 95 / 2.0) style:UITableViewStylePlain];
+    if (IS_IOS8 && self.isPresent) {
+        self.tableView = [[UITableView alloc] initWithFrame:RECT(0, 64, SCREEN_HEIGHT, SCREEN_WIDTH - 64 - 95 / 2.0) style:UITableViewStylePlain];
+    }
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         self.tableView.frame = RECT(0, 64, SCREEN_HEIGHT, SCREEN_WIDTH - 64 - 95 / 2.0);
     }
