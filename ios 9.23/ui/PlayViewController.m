@@ -410,54 +410,45 @@
         [headBackgroundView addSubview:sep2];
         
         
-        UIImageView *sep3 = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
-        sep3.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 4 - 1 * 4, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
-        [headBackgroundView addSubview:sep3];
+//        UIImageView *sep3 = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
+//        sep3.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 4 - 1 * 4, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
+//        [headBackgroundView addSubview:sep3];
+        
+        
+        
+        
+        listButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        listButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 - 1, 0, 56, headBackgroundView.frame.size.height);
+        [listButton setImage:IMAGENAMED(@"listPlay") forState:UIControlStateNormal];
+        [listButton addTarget:self action:@selector(listButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [headBackgroundView addSubview:listButton];
+        
+        videoDefinitionButton = [[VideoDefinitionChooseButton alloc] initWithFrame:CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 2 - 1 * 2, 0, 56, headBackgroundView.frame.size.height) Delegate:self buttonFrame:CGRectMake(0, 0, 56, headBackgroundView.frame.size.height)];
+        videoDefinitionButton.backgroundColor = [UIColor redColor];
+        [headBackgroundView addSubview:videoDefinitionButton];
+        
         
         downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        downloadButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56, 0, 56, headBackgroundView.frame.size.height);
+        downloadButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 3 - 1 * 3, 0, 56, headBackgroundView.frame.size.height);
         [downloadButton setImage:IMAGENAMED(@"downloadPlay") forState:UIControlStateNormal];
         [downloadButton addTarget:self action:@selector(downloadButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [headBackgroundView addSubview:downloadButton];
         
         
         
-        commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        commentButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 2 - 1, 0, 56, headBackgroundView.frame.size.height);
-        [commentButton setImage:IMAGENAMED(@"commentPlay") forState:UIControlStateNormal];
-        [commentButton addTarget:self action:@selector(commentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [headBackgroundView addSubview:commentButton];
+        
+        reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        reportButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 4 - 1 * 4, 0, 56, headBackgroundView.frame.size.height);
+        [reportButton setImage:IMAGENAMED(@"report_video") forState:UIControlStateNormal];
+        
+        [reportButton addTarget:self action:@selector(reportButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        [headBackgroundView addSubview:reportButton];
         
         
-        listButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        listButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 3 - 1 * 2, 0, 56, headBackgroundView.frame.size.height);
-        [listButton setImage:IMAGENAMED(@"listPlay") forState:UIControlStateNormal];
-        [listButton addTarget:self action:@selector(listButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [headBackgroundView addSubview:listButton];
         
         
-        shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 5 - 1 * 4, 0, 56, headBackgroundView.frame.size.height);
-        [shareButton setImage:IMAGENAMED(@"sharePlay") forState:UIControlStateNormal];
-        [shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [headBackgroundView addSubview:shareButton];
+
         
-        if ([[appdelegate haveType] length] != 0) {
-            shareButton.hidden = YES;
-        }
-        else {
-            shareButton.hidden = NO;
-        }
-        
-        
-        collectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        collectButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 4 - 1 * 3, 0, 56, headBackgroundView.frame.size.height);
-        [collectButton setImage:IMAGENAMED(@"collectPlay") forState:UIControlStateNormal];
-        [collectButton setImage:IMAGENAMED(@"collectSelectPlay") forState:UIControlStateSelected];
-        
-        [collectButton addTarget:self action:@selector(collectButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [headBackgroundView addSubview:collectButton];
-        collectButton.selected = self.isCollect;
     }
     else {
         CGRect rect = titleLabel.frame;
@@ -759,6 +750,15 @@
     bottomBackgroundView.userInteractionEnabled = YES;
     [self.view addSubview:bottomBackgroundView];
     
+    /*
+    commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    commentButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 2 - 1, 0, 56, headBackgroundView.frame.size.height);
+    [commentButton setImage:IMAGENAMED(@"commentPlay") forState:UIControlStateNormal];
+    [commentButton addTarget:self action:@selector(commentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headBackgroundView addSubview:commentButton];
+*/
+    
+    
     
     backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 50, 0, 50, bottomBackgroundView.frame.size.height);
@@ -797,6 +797,31 @@
     totalTime.text = @"00:00";
     [bottomBackgroundView addSubview:totalTime];
     
+    /*
+    collectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    collectButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 3 - 1 * 3, 0, 56, headBackgroundView.frame.size.height);
+    [collectButton setImage:IMAGENAMED(@"collectPlay") forState:UIControlStateNormal];
+    [collectButton setImage:IMAGENAMED(@"collectSelectPlay") forState:UIControlStateSelected];
+    
+    [collectButton addTarget:self action:@selector(collectButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headBackgroundView addSubview:collectButton];
+    collectButton.selected = self.isCollect;
+    
+    
+    
+    shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 5 - 1 * 4, 0, 56, headBackgroundView.frame.size.height);
+    [shareButton setImage:IMAGENAMED(@"sharePlay") forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headBackgroundView addSubview:shareButton];
+    
+    if ([[appdelegate haveType] length] != 0) {
+        shareButton.hidden = YES;
+    }
+    else {
+        shareButton.hidden = NO;
+    }
+*/
     
 }
 
@@ -927,15 +952,9 @@
     sep5.frame = CGRectMake(sepWidth * 5 + 4, (playBackgroundView.frame.size.height - 30 * scale) / 2.0, 1, 30 * scale);
     [playBackgroundView addSubview:sep5];
 
-    videoDefinitionButton = [[VideoDefinitionChooseButton alloc] initWithFrame:CGRectMake(playBackgroundView.frame.origin.x + sepWidth * 4, playBackgroundView.frame.origin.y - 148, sepWidth, playBackgroundView.frame.size.height + 148) Delegate:self buttonFrame:CGRectMake(0, 0, sepWidth, playBackgroundView.frame.size.height)];
-    [self.view addSubview:videoDefinitionButton];
     
-    reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    reportButton.frame = CGRectMake(sepWidth * 5, 0, sepWidth, playBackgroundView.frame.size.height);
-    [reportButton setImage:IMAGENAMED(@"report_video") forState:UIControlStateNormal];
     
-    [reportButton addTarget:self action:@selector(reportButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [playBackgroundView addSubview:reportButton];
+    
 }
 
 - (void)reportButtonClick

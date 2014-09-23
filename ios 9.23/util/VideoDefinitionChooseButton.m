@@ -32,23 +32,24 @@
         [self addSubview:self.backgroundView];
         self.backgroundView.hidden = YES;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"volumnBackgroundPlay"]];
-        imageView.frame = CGRectMake(0, 0, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height);
+        imageView.transform = CGAffineTransformMakeRotation(180 * (M_PI / 180.0));
+        imageView.frame = CGRectMake(0, rect.size.height, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height);
         [self.backgroundView addSubview:imageView];
         
         
         CGFloat height = 138 / 3.0;
         
         self.button3 = [self setButton:self.button3 title:@"超清" tag:102 delegate:delegate];
-        self.button3.frame = CGRectMake(0, 0, self.backgroundView.frame.size.width, height);
+        self.button3.frame = CGRectMake(0, rect.size.height, self.backgroundView.frame.size.width, height);
         [self.backgroundView addSubview:self.button3];
     
         self.button2 = [self setButton:self.button2 title:@"高清" tag:101 delegate:delegate];
         self.button2.selected = YES;
-        self.button2.frame = CGRectMake(0, height, self.backgroundView.frame.size.width, height);
+        self.button2.frame = CGRectMake(0, rect.size.height + height, self.backgroundView.frame.size.width, height);
         [self.backgroundView addSubview:self.button2];
         
         self.button1 = [self setButton:self.button1 title:@"标清" tag:100 delegate:delegate];
-        self.button1.frame = CGRectMake(0, height * 2, self.backgroundView.frame.size.width, height);
+        self.button1.frame = CGRectMake(0, rect.size.height + height * 2, self.backgroundView.frame.size.width, height);
         [self.backgroundView addSubview:self.button1];
     }
     return self;
