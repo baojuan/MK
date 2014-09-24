@@ -24,7 +24,6 @@
         self.chooseButton.titleLabel.font = [UIFont systemFontOfSize:12];
 //        [self setBackgroundImage:[UIImage imageNamed:@"definition"] forState:UIControlStateNormal];
         [self.chooseButton addTarget:self action:@selector(chooseButtonControlBackgroundHidden) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.chooseButton];
         
         
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 45) / 2.0, 0, 45, 148)];
@@ -40,17 +39,21 @@
         CGFloat height = 138 / 3.0;
         
         self.button3 = [self setButton:self.button3 title:@"超清" tag:102 delegate:delegate];
-        self.button3.frame = CGRectMake(0, rect.size.height, self.backgroundView.frame.size.width, height);
+        self.button3.frame = CGRectMake(0, 15 + rect.size.height, self.backgroundView.frame.size.width, height);
         [self.backgroundView addSubview:self.button3];
     
         self.button2 = [self setButton:self.button2 title:@"高清" tag:101 delegate:delegate];
         self.button2.selected = YES;
-        self.button2.frame = CGRectMake(0, rect.size.height + height, self.backgroundView.frame.size.width, height);
+        self.button2.frame = CGRectMake(0, 15 + rect.size.height + height, self.backgroundView.frame.size.width, height);
         [self.backgroundView addSubview:self.button2];
         
         self.button1 = [self setButton:self.button1 title:@"标清" tag:100 delegate:delegate];
-        self.button1.frame = CGRectMake(0, rect.size.height + height * 2, self.backgroundView.frame.size.width, height);
+        self.button1.frame = CGRectMake(0, 15 + rect.size.height + height * 2, self.backgroundView.frame.size.width, height);
         [self.backgroundView addSubview:self.button1];
+        
+        
+        [self addSubview:self.chooseButton];
+
     }
     return self;
 }

@@ -21,6 +21,8 @@
 #import "CommentListViewControllerForPad.h"
 #import "GAI.h"
 #import "CachingView.h"
+#import "VolumnView.h"
+
 
 #define SCALE SCREEN_WIDTH / 320.0
 
@@ -79,6 +81,8 @@
     VideoDefinitionChooseButton *videoDefinitionButton;
     UIButton *reportButton;
     
+    //volumnView
+    VolumnView *volumnView;
     
     CachingView *cacheView;
     
@@ -149,7 +153,8 @@
 
     [self setHeadView];
     [self setBottomView];
-    [self setPlayView];
+//    [self setPlayView];
+    [self setVolumnViewForPlay];
     
     [self.view addSubview:self.tableView];
     [self changyan];
@@ -266,7 +271,13 @@
 {
     _cbPlayerController = [PlayManager shareManager].cbPlayerController;
     //_cbPlayerController.scalingMode = CBPMovieScalingModeNone;
-    _cbPlayerController.view.frame = CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
+    if (IS_IOS8) {
+        _cbPlayerController.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    else {
+        _cbPlayerController.view.frame = CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
+
+    }
     [self.view addSubview:_cbPlayerController.view];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGes)];
     [_cbPlayerController.view addGestureRecognizer:tap];
@@ -327,7 +338,7 @@
     }
     
     //    if ([self stringToNumber:totalTime.text] <= 0) {
-    totalTime.text = [self numberToString:_cbPlayerController.duration];
+    totalTime.text = [NSString stringWithFormat:@"/%@",[self numberToString:_cbPlayerController.duration]];
     //    }
     currentTime.text = [self numberToString:curTime];
     slider.value = curTime * 1.0 / _cbPlayerController.duration;
@@ -391,22 +402,25 @@
     
     
     
-
+    CGFloat width = 56;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        width = 67;
+    }
     
     if (!self.isLocal) {
         
         
         UIImageView *sep = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
-        sep.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 - 1, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
+        sep.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width - 1, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
         [headBackgroundView addSubview:sep];
         
         UIImageView *sep1 = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
-        sep1.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 2 - 1 * 2, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
+        sep1.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width * 2 - 1 * 2, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
         [headBackgroundView addSubview:sep1];
         
         
         UIImageView *sep2 = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
-        sep2.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56  * 3 - 1 * 3, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
+        sep2.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width  * 3 - 1 * 3, (headBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
         [headBackgroundView addSubview:sep2];
         
         
@@ -418,19 +432,19 @@
         
         
         listButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        listButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 - 1, 0, 56, headBackgroundView.frame.size.height);
-        [listButton setImage:IMAGENAMED(@"listPlay") forState:UIControlStateNormal];
+        listButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width - 1, 0, width, headBackgroundView.frame.size.height);
+        [listButton setImage:IMAGENAMED(@"video_choose") forState:UIControlStateNormal];
         [listButton addTarget:self action:@selector(listButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [headBackgroundView addSubview:listButton];
         
-        videoDefinitionButton = [[VideoDefinitionChooseButton alloc] initWithFrame:CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 2 - 1 * 2, 0, 56, headBackgroundView.frame.size.height) Delegate:self buttonFrame:CGRectMake(0, 0, 56, headBackgroundView.frame.size.height)];
-        videoDefinitionButton.backgroundColor = [UIColor redColor];
+        videoDefinitionButton = [[VideoDefinitionChooseButton alloc] initWithFrame:CGRectMake(_cbPlayerController.view.frame.size.width - width * 2 - 1 * 2, 0, width, headBackgroundView.frame.size.height) Delegate:self buttonFrame:CGRectMake(0, 0, width, headBackgroundView.frame.size.height)];
+        videoDefinitionButton.backgroundColor = [UIColor clearColor];
         [headBackgroundView addSubview:videoDefinitionButton];
         
         
         downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        downloadButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 3 - 1 * 3, 0, 56, headBackgroundView.frame.size.height);
-        [downloadButton setImage:IMAGENAMED(@"downloadPlay") forState:UIControlStateNormal];
+        downloadButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width * 3 - 1 * 3, 0, width, headBackgroundView.frame.size.height);
+        [downloadButton setImage:IMAGENAMED(@"download") forState:UIControlStateNormal];
         [downloadButton addTarget:self action:@selector(downloadButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [headBackgroundView addSubview:downloadButton];
         
@@ -438,7 +452,7 @@
         
         
         reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        reportButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 4 - 1 * 4, 0, 56, headBackgroundView.frame.size.height);
+        reportButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width * 4 - 1 * 4, 0, width, headBackgroundView.frame.size.height);
         [reportButton setImage:IMAGENAMED(@"report_video") forState:UIControlStateNormal];
         
         [reportButton addTarget:self action:@selector(reportButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -585,9 +599,9 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT - 200, 40 * scale, 200, SCREEN_WIDTH - (40 + 30 ) * scale) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(_cbPlayerController.view.frame.size.width - 200, 40 * scale, 200, _cbPlayerController.view.frame.size.height - (40 + 54 ) * scale) style:UITableViewStylePlain];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            _tableView.frame = CGRectMake(SCREEN_HEIGHT - 300, 40 * scale, 300, SCREEN_WIDTH - (40 + 30 ) * scale);
+            _tableView.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 300, 40 * scale, 300, _cbPlayerController.view.frame.size.height - (40 + 54) * scale);
         }
         _tableView.hidden = YES;
         _tableView.backgroundColor = RGBCOLOR(73, 73, 73);
@@ -746,23 +760,52 @@
 - (void)setBottomView
 {
     bottomBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headBackgroundPlay"]];
-    bottomBackgroundView.frame = CGRectMake(0, _cbPlayerController.view.frame.size.height - 30 * scale, _cbPlayerController.view.frame.size.width, 30  * scale);
+    bottomBackgroundView.frame = CGRectMake(0, _cbPlayerController.view.frame.size.height - 54 * scale, _cbPlayerController.view.frame.size.width, 54  * scale);
     bottomBackgroundView.userInteractionEnabled = YES;
     [self.view addSubview:bottomBackgroundView];
     
-    /*
-    commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    commentButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 2 - 1, 0, 56, headBackgroundView.frame.size.height);
-    [commentButton setImage:IMAGENAMED(@"commentPlay") forState:UIControlStateNormal];
-    [commentButton addTarget:self action:@selector(commentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [headBackgroundView addSubview:commentButton];
-*/
+    CGFloat width = 56;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        width = 67;
+    }
+
+    
+    _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _playButton.frame = CGRectMake(17, (bottomBackgroundView.frame.size.height - 38) / 2.0, 38, 38);
+    [_playButton setImage:IMAGENAMED(@"play_orange") forState:UIControlStateNormal];
+    [_playButton setImage:IMAGENAMED(@"play_suspend") forState:UIControlStateSelected];
+    
+    [_playButton addTarget:self action:@selector(playButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBackgroundView addSubview:_playButton];
+    
+    
+    
+    nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    nextButton.frame = CGRectMake(80, (bottomBackgroundView.frame.size.height - 20) / 2.0, 20, 20);
+    [nextButton setImage:IMAGENAMED(@"next") forState:UIControlStateNormal];
+    
+    [nextButton addTarget:self action:@selector(nextButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBackgroundView addSubview:nextButton];
+
+    
+    UIImageView *sep = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
+    sep.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width - 1, (bottomBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
+    [bottomBackgroundView addSubview:sep];
+    
+    UIImageView *sep1 = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
+    sep1.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width * 2 - 1 * 2, (bottomBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
+    [bottomBackgroundView addSubview:sep1];
+    
+    
+    UIImageView *sep2 = [[UIImageView alloc] initWithImage:IMAGENAMED(@"sepPlay")];
+    sep2.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width  * 3 - 1 * 3, (bottomBackgroundView.frame.size.height - 30 * scale) / 2.0, sep.frame.size.width, 30 * scale);
+    [bottomBackgroundView addSubview:sep2];
     
     
     
     backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 50, 0, 50, bottomBackgroundView.frame.size.height);
-    backButton.backgroundColor = RGBCOLOR(225, 138, 0);
+    backButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width, 0, width, bottomBackgroundView.frame.size.height);
+    backButton.backgroundColor = [UIColor clearColor];
     [backButton setTitle:LOCAL_LANGUAGE(@"back") forState:UIControlStateNormal];
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     backButton.titleLabel.font = FONTSIZE(14);
@@ -770,7 +813,7 @@
     [bottomBackgroundView addSubview:backButton];
     
     
-    slider = [[UISlider alloc] initWithFrame:CGRectMake(56, 0, bottomBackgroundView.frame.size.width - 100 - 56, bottomBackgroundView.frame.size.height)];
+    slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, bottomBackgroundView.frame.size.width, 5)];
     slider.minimumTrackTintColor = [UIColor colorWithRed:255/255.0 green:138/255.0 blue:0 alpha:1];
     slider.maximumTrackTintColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1];
     [slider addTarget:self action:@selector(onDragSlideValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -780,40 +823,41 @@
     slider.continuous = true;
     
     
-    currentTime = [[UILabel alloc] initWithFrame:CGRectMake(0, 3, 56, bottomBackgroundView.frame.size.height)];
+    currentTime = [[UILabel alloc] initWithFrame:CGRectMake(136, 3, 50, bottomBackgroundView.frame.size.height)];
     currentTime.font = [UIFont fontWithName:@"Heiti SC" size:14];
     currentTime.textAlignment = NSTextAlignmentCenter;
     currentTime.backgroundColor = [UIColor clearColor];
     currentTime.textColor = [UIColor whiteColor];
     currentTime.text = @"00:00";
+    currentTime.textAlignment = NSTextAlignmentRight;
     [bottomBackgroundView addSubview:currentTime];
     
     
-    totalTime = [[UILabel alloc] initWithFrame:CGRectMake(slider.frame.origin.x + slider.frame.size.width, 3, 50, bottomBackgroundView.frame.size.height)];
+    totalTime = [[UILabel alloc] initWithFrame:CGRectMake(currentTime.frame.size.width + currentTime.frame.origin.x, 3, 50, bottomBackgroundView.frame.size.height)];
     totalTime.font = [UIFont fontWithName:@"Heiti SC" size:14];
-    totalTime.textAlignment = NSTextAlignmentCenter;
+    totalTime.textAlignment = NSTextAlignmentLeft;
     totalTime.textColor = [UIColor whiteColor];
     totalTime.backgroundColor = [UIColor clearColor];
-    totalTime.text = @"00:00";
+    totalTime.text = @"/00:00";
     [bottomBackgroundView addSubview:totalTime];
     
-    /*
+    
     collectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    collectButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 3 - 1 * 3, 0, 56, headBackgroundView.frame.size.height);
-    [collectButton setImage:IMAGENAMED(@"collectPlay") forState:UIControlStateNormal];
-    [collectButton setImage:IMAGENAMED(@"collectSelectPlay") forState:UIControlStateSelected];
+    collectButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width * 2 - 1 * 1, 0, width, bottomBackgroundView.frame.size.height);
+    [collectButton setImage:IMAGENAMED(@"video_collect") forState:UIControlStateNormal];
+    [collectButton setImage:IMAGENAMED(@"video_collect_pressed") forState:UIControlStateSelected];
     
     [collectButton addTarget:self action:@selector(collectButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [headBackgroundView addSubview:collectButton];
+    [bottomBackgroundView addSubview:collectButton];
     collectButton.selected = self.isCollect;
     
     
     
     shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    shareButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - 56 * 5 - 1 * 4, 0, 56, headBackgroundView.frame.size.height);
-    [shareButton setImage:IMAGENAMED(@"sharePlay") forState:UIControlStateNormal];
+    shareButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width * 3 - 1 * 2, 0, width, bottomBackgroundView.frame.size.height);
+    [shareButton setImage:IMAGENAMED(@"icon_share") forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [headBackgroundView addSubview:shareButton];
+    [bottomBackgroundView addSubview:shareButton];
     
     if ([[appdelegate haveType] length] != 0) {
         shareButton.hidden = YES;
@@ -821,7 +865,14 @@
     else {
         shareButton.hidden = NO;
     }
-*/
+
+    
+    commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    commentButton.frame = CGRectMake(_cbPlayerController.view.frame.size.width - width * 4 - 1 * 3, 0, width, bottomBackgroundView.frame.size.height);
+    [commentButton setImage:IMAGENAMED(@"comment_video") forState:UIControlStateNormal];
+    [commentButton addTarget:self action:@selector(commentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBackgroundView addSubview:commentButton];
+
     
 }
 
@@ -864,6 +915,13 @@
         self.mobiSageBanner.delegate = nil;
         self.mobiSageBanner = nil;
     }];
+}
+#pragma mark - volumnView
+
+- (void)setVolumnViewForPlay
+{
+    volumnView = [[VolumnView alloc] initWithFrame:CGRectMake(0, (_cbPlayerController.view.frame.size.height - 175) / 2.0, 40, 175)];
+    [self.view addSubview:volumnView];
 }
 
 #pragma mark - playView
@@ -1059,6 +1117,7 @@
     volumeController.hidden = !volumeController.hidden;
     videoDefinitionButton.hidden = !videoDefinitionButton.hidden;
     [videoDefinitionButton backgroundViewHiddenOrNot:YES];
+    volumnView.hidden = !volumnView.hidden;
 //    adBanner.hidden = !adBanner.hidden;
 }
 
@@ -1089,7 +1148,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         //self.mobiSageBanner.frame = CGRectMake((SCREEN_HEIGHT - 320) / 2.0, playBackgroundView.frame.origin.y + playBackgroundView.frame.size.height, 320, 50);
         
-        self.mobiSageBanner.frame = CGRectMake((SCREEN_HEIGHT - 320) / 2.0, SCREEN_WIDTH - 83, 320, 50);
+        self.mobiSageBanner.frame = CGRectMake((SCREEN_HEIGHT - 320) / 2.0, SCREEN_WIDTH - 83 - 30, 320, 50);
     } else {
         //self.mobiSageBanner.frame = CGRectMake((SCREEN_HEIGHT - 728) / 2.0, playBackgroundView.frame.origin.y + playBackgroundView.frame.size.height + 10, 728, 90);
         self.mobiSageBanner.frame = CGRectMake((SCREEN_HEIGHT - 728) / 2.0, SCREEN_WIDTH - 130, 728, 90);
