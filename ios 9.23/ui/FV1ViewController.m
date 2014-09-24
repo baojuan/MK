@@ -347,18 +347,19 @@
 {
     self.tableView = [[UITableView alloc] initWithFrame:RECT(0, navigationView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - navigationView.frame.size.height - 49) style:UITableViewStylePlain];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        self.tableView.backgroundColor = [UIColor whiteColor];
+        self.tableView.backgroundColor = RGBCOLOR(243, 243, 243);
         self.tableView.frame = RECT(60, 64, 470, SCREEN_WIDTH - 64);
     }
     else {
-        self.tableView.backgroundColor = [UIColor clearColor];
+        self.tableView.backgroundColor = RGBCOLOR(243, 243, 243);
 
     }
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    if([_tableView respondsToSelector:@selector(setSeparatorInset:)]){
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
-    }
+//    if([_tableView respondsToSelector:@selector(setSeparatorInset:)]){
+//        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
+//    }
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     UIView *tempFooterView = [[UIView alloc] initWithFrame:RECT(0, 0, self.tableView.frame.size.width, 1)];
     tempFooterView.backgroundColor = [UIColor clearColor];
@@ -403,6 +404,7 @@
 {
     return 88.0;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
