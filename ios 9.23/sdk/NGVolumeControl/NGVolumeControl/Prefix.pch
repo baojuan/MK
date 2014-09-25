@@ -1,9 +1,0 @@
-//
-// Prefix header for all source files of the 'NGVolumeControl' target in the 'NGVolumeControl' project
-//
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <MediaPlayer/MediaPlayer.h>
-    #import <QuartzCore/QuartzCore.h>
-#endif
