@@ -15,10 +15,10 @@
 @interface FV1ViewController : GAITrackedViewController
 
 @property (nonatomic, assign) int page;
-@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSString *navTitle;
 
 + (NSString *)getTypeId;
 - (void)getCenterViewData:(NSString *)title;
 
+- (void)reloadData;
 @end

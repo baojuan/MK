@@ -495,7 +495,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
         
         self.haveType = [[pagedoc.rootElement attributeForName:@"type"] stringValue];
         [self.rightViewController setType];
-        [self.fv1.tableView reloadData];
+        [self.fv1 reloadData];
         NSArray *employees = [pagedoc nodesForXPath:@"//category" error:NULL];
         
         for (GDataXMLElement *employe in employees) {

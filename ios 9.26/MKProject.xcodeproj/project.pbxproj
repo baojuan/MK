@@ -153,6 +153,10 @@
 		BF5894FD19D3065300112AFD /* video_collect_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5894D019D3050400112AFD /* video_collect_pressed.png */; };
 		BF5894FE19D3065300112AFD /* video_collect.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5894D119D3050400112AFD /* video_collect.png */; };
 		BF5894FF19D3065300112AFD /* volumn_video.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5894D219D3050400112AFD /* volumn_video.png */; };
+		BF58950219D45BC000112AFD /* FV1TableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF58950119D45BC000112AFD /* FV1TableTableViewController.m */; };
+		BF58950319D46B2900112AFD /* libCyberPlayerController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DB3196507B200B44F4F /* libCyberPlayerController.a */; };
+		BF58950419D46B4100112AFD /* libCyberPlayerController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBC196507B200B44F4F /* libCyberPlayerController.a */; };
+		BF58950519D478A100112AFD /* FV1TableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF58950119D45BC000112AFD /* FV1TableTableViewController.m */; };
 		BF5A00711955F1130037893C /* leftBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5A00701955F1130037893C /* leftBack@2x.png */; };
 		BF5A00741955FA870037893C /* leftedit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5A00721955FA870037893C /* leftedit@2x.png */; };
 		BF5A00751955FA870037893C /* leftleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5A00731955FA870037893C /* leftleft@2x.png */; };
@@ -496,7 +500,6 @@
 		BFCB4DE119650C5100B44F4F /* NGVolumeControl.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFCB4DDF19650C5100B44F4F /* NGVolumeControl.bundle */; };
 		BFD5E092196AA64B001C051F /* libASIHTTP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBA196507B200B44F4F /* libASIHTTP.a */; };
 		BFD5E093196AA64B001C051F /* libBase64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBB196507B200B44F4F /* libBase64.a */; };
-		BFD5E094196AA64B001C051F /* libCyberPlayerController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBC196507B200B44F4F /* libCyberPlayerController.a */; };
 		BFD5E095196AA64B001C051F /* libCyberPlayerUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBD196507B200B44F4F /* libCyberPlayerUtils.a */; };
 		BFD5E096196AA64B001C051F /* libGzipCompressor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBE196507B200B44F4F /* libGzipCompressor.a */; };
 		BFD5E097196AA64B001C051F /* libReachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBF196507B200B44F4F /* libReachability.a */; };
@@ -953,7 +956,6 @@
 		BFFAF64F19D1A4AD00934FF2 /* tabnews_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2F542E196D956200B815B7 /* tabnews_ipad@2x.png */; };
 		BFFAF65519D1A52B00934FF2 /* libASIHTTP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBA196507B200B44F4F /* libASIHTTP.a */; };
 		BFFAF65619D1A52B00934FF2 /* libBase64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBB196507B200B44F4F /* libBase64.a */; };
-		BFFAF65719D1A52B00934FF2 /* libCyberPlayerController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBC196507B200B44F4F /* libCyberPlayerController.a */; };
 		BFFAF65819D1A52B00934FF2 /* libCyberPlayerUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBD196507B200B44F4F /* libCyberPlayerUtils.a */; };
 		BFFAF65919D1A52B00934FF2 /* libGzipCompressor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBE196507B200B44F4F /* libGzipCompressor.a */; };
 		BFFAF65A19D1A52B00934FF2 /* libReachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB4DBF196507B200B44F4F /* libReachability.a */; };
@@ -1193,6 +1195,8 @@
 		BF5894EE19D3061E00112AFD /* video_collect_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_collect_pressed.png; path = ../view/video_collect_pressed.png; sourceTree = "<group>"; };
 		BF5894EF19D3061E00112AFD /* video_collect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_collect.png; path = ../view/video_collect.png; sourceTree = "<group>"; };
 		BF5894F019D3061E00112AFD /* volumn_video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volumn_video.png; path = ../view/volumn_video.png; sourceTree = "<group>"; };
+		BF58950019D45BC000112AFD /* FV1TableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FV1TableTableViewController.h; sourceTree = "<group>"; };
+		BF58950119D45BC000112AFD /* FV1TableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FV1TableTableViewController.m; sourceTree = "<group>"; };
 		BF5A00701955F1130037893C /* leftBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftBack@2x.png"; sourceTree = "<group>"; };
 		BF5A00721955FA870037893C /* leftedit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftedit@2x.png"; sourceTree = "<group>"; };
 		BF5A00731955FA870037893C /* leftleft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftleft@2x.png"; sourceTree = "<group>"; };
@@ -1773,6 +1777,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF58950319D46B2900112AFD /* libCyberPlayerController.a in Frameworks */,
 				6691638E197EB66200BD1878 /* AdSupport.framework in Frameworks */,
 				BFAA85B71975408F00F22C3B /* AssetsLibrary.framework in Frameworks */,
 				BF2F54AC1971090400B815B7 /* CoreMedia.framework in Frameworks */,
@@ -1795,7 +1800,6 @@
 				BF2F548E1971086200B815B7 /* libmobiSageSDK.a in Frameworks */,
 				BF2F5478196EED3200B815B7 /* libGoogleAnalyticsServices.a in Frameworks */,
 				BFD5E093196AA64B001C051F /* libBase64.a in Frameworks */,
-				BFD5E094196AA64B001C051F /* libCyberPlayerController.a in Frameworks */,
 				BFD5E095196AA64B001C051F /* libCyberPlayerUtils.a in Frameworks */,
 				BFD5E096196AA64B001C051F /* libGzipCompressor.a in Frameworks */,
 				BFD5E097196AA64B001C051F /* libReachability.a in Frameworks */,
@@ -1834,9 +1838,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF58950419D46B4100112AFD /* libCyberPlayerController.a in Frameworks */,
 				BFFAF65519D1A52B00934FF2 /* libASIHTTP.a in Frameworks */,
 				BFFAF65619D1A52B00934FF2 /* libBase64.a in Frameworks */,
-				BFFAF65719D1A52B00934FF2 /* libCyberPlayerController.a in Frameworks */,
 				BFFAF65819D1A52B00934FF2 /* libCyberPlayerUtils.a in Frameworks */,
 				BFFAF65919D1A52B00934FF2 /* libGzipCompressor.a in Frameworks */,
 				BFFAF65A19D1A52B00934FF2 /* libReachability.a in Frameworks */,
@@ -2288,6 +2292,8 @@
 			children = (
 				BF701818194F456E0052516E /* FV1ViewController.h */,
 				BF701819194F456E0052516E /* FV1ViewController.m */,
+				BF58950019D45BC000112AFD /* FV1TableTableViewController.h */,
+				BF58950119D45BC000112AFD /* FV1TableTableViewController.m */,
 				BF70181B194F45780052516E /* FV2ViewController.h */,
 				BF70181C194F45780052516E /* FV2ViewController.m */,
 				BF70181E194F45820052516E /* FV3ViewController.h */,
@@ -4012,6 +4018,7 @@
 				BF8DD5D11965646A00872818 /* DDTTYLogger.m in Sources */,
 				BF8DD5BE1965646A00872818 /* M3U8Manager.m in Sources */,
 				BF70182F194F45D10052516E /* FV8ViewController.m in Sources */,
+				BF58950219D45BC000112AFD /* FV1TableTableViewController.m in Sources */,
 				BFBA24261984B6EE00FF7A45 /* NSString+FanZhuan.m in Sources */,
 				BF8DD5B01965646A00872818 /* HTTPAsyncFileResponse.m in Sources */,
 				BF8DD5AE1965646A00872818 /* MultipartMessageHeader.m in Sources */,
@@ -4056,6 +4063,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF58950519D478A100112AFD /* FV1TableTableViewController.m in Sources */,
 				BF5894C319D2F7B800112AFD /* VolumnView.m in Sources */,
 				BFFAF48519D1A4AD00934FF2 /* AFURLConnectionOperation.m in Sources */,
 				BFFAF48619D1A4AD00934FF2 /* MKTabbar.m in Sources */,
@@ -4409,7 +4417,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/sdk/baiduPlay/Release-iphoneos\"",
-					"\"$(SRCROOT)/sdk/baiduPlay/Release-iphonesimulator\"",
 					"\"$(SRCROOT)/sdk/ChangyanSDK\"",
 					"\"$(SRCROOT)/sdk/libWeiboSDK\"",
 					"\"$(SRCROOT)/sdk/weixin\"",
@@ -4445,7 +4452,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/sdk/baiduPlay/Release-iphoneos\"",
-					"\"$(SRCROOT)/sdk/baiduPlay/Release-iphonesimulator\"",
 					"\"$(SRCROOT)/sdk/ChangyanSDK\"",
 					"\"$(SRCROOT)/sdk/libWeiboSDK\"",
 					"\"$(SRCROOT)/sdk/weixin\"",
@@ -4530,7 +4536,6 @@
 					"\"$(SRCROOT)/sdk/googleaa\"",
 					"\"$(SRCROOT)/sdk/MobiSageSDK\"",
 					"\"$(SRCROOT)/sdk/bpush\"",
-					"\"$(SRCROOT)/sdk/baiduPlay/Release-iphonesimulator\"",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "MKProject copy";
@@ -4566,7 +4571,6 @@
 					"\"$(SRCROOT)/sdk/googleaa\"",
 					"\"$(SRCROOT)/sdk/MobiSageSDK\"",
 					"\"$(SRCROOT)/sdk/bpush\"",
-					"\"$(SRCROOT)/sdk/baiduPlay/Release-iphonesimulator\"",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "MKProject copy";
